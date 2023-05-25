@@ -10,17 +10,20 @@ import axios from 'axios';
 
 function App() {
 
+  const [countriesList, setCountriesList] = useState([]);
+
   useEffect(() => {
     axios
       .get('https://ih-countries-api.herokuapp.com/countries')
       .then(res => {
-        return countries = res.data;
+        console.log('#########', res.data)
+        setCountriesList(res.data)
+
       })
       .catch(err => {
         // Handle the error which will hopefully never happen
       });
   }, []);
-  const [countriesList, setCountriesList] = useState(countries);
   // setCountriesList(countries)
    
   return (
@@ -28,7 +31,7 @@ function App() {
       <Navbar />
       <div className="container">
         <div className="row">
-          <CountriesList countries={countries} />
+          <CountriesList countries={countriesList} />
           {/* React-Router Route rendering the CountryDetails should go here */}
         </div>
       </div>
